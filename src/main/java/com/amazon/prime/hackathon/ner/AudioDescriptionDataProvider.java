@@ -12,20 +12,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.algorithmia.AlgorithmException;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AudioDescriptionDataProvider implements IAudioDescriptionDataProvider{
 
-	public static void main(String[] args) {
-		AudioDescriptionDataProvider provider = new AudioDescriptionDataProvider(new NamedEntitiesProvider());
-		Map<Integer, Set<String>> data = provider.getData("goodomens");
-		data.keySet().stream().forEach(key->{
-			System.out.println(key + " " + data.get(key));
-		});
-		Map<Integer, Set<String>> data2 = provider.getData("goodomens");
-		data2.keySet().stream().forEach(key->{
-			System.out.println(key + " " + data2.get(key));
-		});
-	}
+//	public static void main(String[] args) {
+////		AudioDescriptionDataProvider provider = new AudioDescriptionDataProvider(new NamedEntitiesProvider());
+////		Map<Integer, Set<String>> data = provider.getData("goodomens");
+////		data.keySet().stream().forEach(key->{
+////			System.out.println(key + " " + data.get(key));
+////		});
+////		Map<Integer, Set<String>> data2 = provider.getData("goodomens");
+////		data2.keySet().stream().forEach(key->{
+////			System.out.println(key + " " + data2.get(key));
+////		});
+////	}
 
 	private static final String AD_FILE_FORMAT = "\\[(?<timestamp>.{4,8})\\] (?<line>.*)";
 	private final Pattern _ADPattern;

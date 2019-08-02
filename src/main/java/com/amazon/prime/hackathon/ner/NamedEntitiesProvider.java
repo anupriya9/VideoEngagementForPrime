@@ -13,7 +13,9 @@ import com.algorithmia.algo.Algorithm;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class NamedEntitiesProvider implements INamedEntitiesProvider{
 
 	private final AlgorithmiaClient client;
