@@ -22,7 +22,7 @@ public class ForwardCommandHandler implements IQueryHandler{
 				return currentTimeStamp + (WordNumberHelper.getNum(wordNumber)* 60 * 60);
 			}
 		}
-		return null;
+		return currentTimeStamp;
 	}
 
 }
