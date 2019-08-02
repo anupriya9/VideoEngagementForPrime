@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class NamedEntitiesProvider {
+public class NamedEntitiesProvider implements INamedEntitiesProvider{
 
 	private final AlgorithmiaClient client;
 	private final Algorithm algo;
