@@ -47,7 +47,7 @@ public class ContextCommandHandler implements IQueryHandler{
 			});
 
 
-			return timestamp.get();
+			return timestamp.get() - currentTimeStamp;
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (AlgorithmException e) {
