@@ -4,6 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import org.springframework.stereotype.Service;
+
+import com.amazon.prime.hackathon.ner.AudioDescriptionDataProvider;
+import com.amazon.prime.hackathon.ner.NamedEntitiesProvider;
+
+@Service
 public class MainQueryHandler {
 
 	private final List<GenericQueryHandler> handlers;
@@ -12,11 +18,13 @@ public class MainQueryHandler {
 		this.handlers = new LinkedList<GenericQueryHandler>();
 		final RewindCommandHandler rewindCommandHandler = new RewindCommandHandler();
 		final ForwardCommandHandler forwardCommandHandler = new ForwardCommandHandler();
-		handlers.add(new GenericQueryHandler("(?i).*(rewind).*by (?<data>[0-9a-z]{1,20} (second|minute|hour)).*", rewindCommandHandler));
-		handlers.add(new GenericQueryHandler("(?i).*(forward).*by (?<data>[0-9a-z]{1,20} (second|minute|hour)).*", forwardCommandHandler));	
+		final ContextCommandHandler contextCommandHandler = new ContextCommandHandler(new AudioDescriptionDataProvider(new NamedEntitiesProvider()));
+		handlers.add(new GenericQueryHandler("(?i).*(rewind).*(by|to) (?<data>[0-9a-z\\s]{1,20} (second|minute|hour)).*", rewindCommandHandler));
+		handlers.add(new GenericQueryHandler("(?i).*(forward).*(by|to) (?<data>[0-9a-z\\s]{1,20} (second|minute|hour)).*", forwardCommandHandler));	
+		handlers.add(new GenericQueryHandler("(?i).*(play|take).*(when|where|from)(?<data>[0-9a-z\\s]*)", contextCommandHandler));	
 	}
 	
-	final Integer handleQuery(final Integer timestamp, final String command) {
+	public final Integer handleQuery(final Integer timestamp, final String command) {
 		for(GenericQueryHandler handler : handlers) {
 			final Matcher matcher = handler.matcher(command);
 			if(matcher.matches()) {
@@ -26,8 +34,3 @@ public class MainQueryHandler {
 		return 0;
 	}	
 }
-//rewind
-//forward
-//take me to the point where this happened
-//take me to the point where someone said
-
