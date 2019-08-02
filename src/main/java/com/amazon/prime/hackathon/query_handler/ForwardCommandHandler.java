@@ -13,13 +13,13 @@ public class ForwardCommandHandler implements IQueryHandler{
 			final String unit = dataArr[dataArr.length-1].toLowerCase();
 			final String wordNumber = data.toLowerCase().replace(unit, "").trim();
 			if(unit.startsWith("sec")) {
-				return currentTimeStamp + WordNumberHelper.getNum(wordNumber);
+				return WordNumberHelper.getNum(wordNumber);
 			}
 			if(unit.startsWith("min")) {
-				return currentTimeStamp + (WordNumberHelper.getNum(wordNumber)* 60);
+				return (WordNumberHelper.getNum(wordNumber)* 60);
 			}
 			if(unit.startsWith("hour")) {
-				return currentTimeStamp + (WordNumberHelper.getNum(wordNumber)* 60 * 60);
+				return (WordNumberHelper.getNum(wordNumber)* 60 * 60);
 			}
 		}
 		return currentTimeStamp;
