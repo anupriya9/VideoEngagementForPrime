@@ -21,8 +21,8 @@ public class MainQueryHandler {
 		final RewindCommandHandler rewindCommandHandler = new RewindCommandHandler();
 		final ForwardCommandHandler forwardCommandHandler = new ForwardCommandHandler();
 		final ContextCommandHandler contextCommandHandler = new ContextCommandHandler(namedEntitiesProvider, audioDescriptionDataProvider);
-		handlers.add(new GenericQueryHandler("(?i).*(rewind).*(by|to) (?<data>[0-9a-z\\s]{1,20} (second|minute|hour)).*", rewindCommandHandler));
-		handlers.add(new GenericQueryHandler("(?i).*(forward).*(by|to) (?<data>[0-9a-z\\s]{1,20} (second|minute|hour)).*", forwardCommandHandler));	
+		handlers.add(new GenericQueryHandler("(?i).*(rewind).*(by|to) (?<data>[0-9a-z\\s]{1,50} (second|minute|hour)).*", rewindCommandHandler));
+		handlers.add(new GenericQueryHandler("(?i).*(forward).*(by|to) (?<data>[0-9a-z\\s]{1,50} (second|minute|hour)).*", forwardCommandHandler));	
 		handlers.add(new GenericQueryHandler("(?i).*(play|take).*(when|where|from)(?<data>[0-9a-z\\s]*)", contextCommandHandler));	
 	}
 	
