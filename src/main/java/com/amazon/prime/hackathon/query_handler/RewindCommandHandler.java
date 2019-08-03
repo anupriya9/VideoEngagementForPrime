@@ -8,7 +8,7 @@ public class RewindCommandHandler implements IQueryHandler{
 	}
 
 	@Override
-	public Integer handle(Integer currentTimeStamp, String data) {
+	public Integer handle(final String videoId, Integer currentTimeStamp, String data) {
 		String[] dataArr = data.split(" ");
 		if(dataArr.length>1) {
 			final String unit = dataArr[dataArr.length-1].toLowerCase();

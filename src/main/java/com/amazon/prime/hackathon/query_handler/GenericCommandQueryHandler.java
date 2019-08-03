@@ -1,20 +1,19 @@
 package com.amazon.prime.hackathon.query_handler;
 
-import com.algorithmia.AlgorithmException;
-import com.amazon.prime.hackathon.ner.IAudioDescriptionDataProvider;
-import com.amazon.prime.hackathon.ner.INamedEntitiesProvider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.springframework.stereotype.Component;
+
+import com.algorithmia.AlgorithmException;
+import com.amazon.prime.hackathon.ner.IAudioDescriptionDataProvider;
+import com.amazon.prime.hackathon.ner.INamedEntitiesProvider;
+
 @Component
 public class GenericCommandQueryHandler implements IQueryHandler {
-    private final String VIDEO_ID = "goodomens";
     private IAudioDescriptionDataProvider audioDescriptionDataProvider;
 
     private INamedEntitiesProvider namedEntitiesProvider;
@@ -26,11 +25,11 @@ public class GenericCommandQueryHandler implements IQueryHandler {
     }
 
     @Override
-    public Integer handle(Integer currentTimeStamp, String command) {
+    public Integer handle(final String videoId, Integer currentTimeStamp, String command) {
 
         try {
             Set<String> querySet = namedEntitiesProvider.getNamedEntities(command);
-            Map<Integer,Set<String>> audioDescriptionMap = audioDescriptionDataProvider.getData(VIDEO_ID);
+            Map<Integer,Set<String>> audioDescriptionMap = audioDescriptionDataProvider.getData(videoId);
             AtomicInteger maxScore = new AtomicInteger();
             AtomicInteger scoreVal = new AtomicInteger();
             AtomicReference<Integer> timestamp = new AtomicReference<>(0);

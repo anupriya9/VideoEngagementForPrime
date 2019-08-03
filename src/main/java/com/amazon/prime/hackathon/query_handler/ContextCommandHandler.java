@@ -12,7 +12,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ContextCommandHandler implements IQueryHandler{
 
-	private final String VIDEO_ID = "goodomens";
 	private final IAudioDescriptionDataProvider audioDescriptionDataProvider;
 
 	private final INamedEntitiesProvider namedEntitiesProvider;
@@ -24,12 +23,11 @@ public class ContextCommandHandler implements IQueryHandler{
 	}
 
 	@Override
-	public Integer handle(Integer currentTimeStamp, String command) {
-
+	public Integer handle(final String videoId, Integer currentTimeStamp, String command) {
 
 		try {
 			Set<String> querySet = namedEntitiesProvider.getNamedEntities(command);
-			Map<Integer,Set<String>> audioDescriptionMap = audioDescriptionDataProvider.getData(VIDEO_ID);
+			Map<Integer,Set<String>> audioDescriptionMap = audioDescriptionDataProvider.getData(videoId);
 			AtomicInteger maxScore = new AtomicInteger();
 			AtomicInteger scoreVal = new AtomicInteger();
 			AtomicReference<Integer> timestamp = new AtomicReference<>(0);

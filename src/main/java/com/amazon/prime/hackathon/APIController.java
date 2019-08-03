@@ -12,7 +12,8 @@ public class APIController {
     @RequestMapping(value = "timestamp/{timestamp}/query/{query}", method = RequestMethod.GET)
     @ResponseBody
     public Integer getTimeStamp(@PathVariable Integer timestamp,
-                                @PathVariable String query) {
-        return mainQueryHandler.handleQuery(timestamp, query);
+                                @PathVariable String query,
+                                @PathVariable String videoId) {
+        return mainQueryHandler.handleQuery(videoId, timestamp, query);
     }
 }

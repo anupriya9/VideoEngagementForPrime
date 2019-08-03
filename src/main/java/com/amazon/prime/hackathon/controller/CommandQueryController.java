@@ -16,12 +16,8 @@ public class CommandQueryController
     private MainQueryHandler handler;
      
     @GetMapping(path="/query", produces = "application/json")
-    public Integer getTimestamp(@RequestParam("timestamp") int timestamp, @RequestParam("command") String command)
+    public Integer getTimestamp(@RequestParam("videoId") String videoId,@RequestParam("currentTimestamp") int currentTimestamp, @RequestParam("command") String command)
     {
-    	System.out.println(timestamp);
-    	System.out.println(command);
-    	
-
-    	return handler.handleQuery(timestamp, command);
+    	return handler.handleQuery(videoId, currentTimestamp, command);
     }
 }
