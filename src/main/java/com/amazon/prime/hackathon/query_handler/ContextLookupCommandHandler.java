@@ -12,13 +12,13 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ContextLookupCommandHandler implements IQueryHandler{
 
-	private final IDataProvider audioDescriptionDataProvider;
+	private final IDataProvider dataProvider;
 
 	private final INamedEntitiesProvider namedEntitiesProvider;
 
 	public ContextLookupCommandHandler(INamedEntitiesProvider namedEntitiesProvider,
-								 IDataProvider audioDescriptionDataProvider){
-		this.audioDescriptionDataProvider = audioDescriptionDataProvider;
+								 IDataProvider dataProvider){
+		this.dataProvider = dataProvider;
 		this.namedEntitiesProvider = namedEntitiesProvider;
 	}
 
@@ -27,7 +27,7 @@ public class ContextLookupCommandHandler implements IQueryHandler{
 
 		try {
 			Set<String> querySet = namedEntitiesProvider.getNamedEntities(command);
-			Map<Integer,Set<String>> audioDescriptionMap = audioDescriptionDataProvider.getData(videoId);
+			Map<Integer,Set<String>> audioDescriptionMap = dataProvider.getData(videoId);
 			AtomicInteger maxScore = new AtomicInteger();
 			AtomicInteger scoreVal = new AtomicInteger();
 			AtomicReference<Integer> timestamp = new AtomicReference<>(0);

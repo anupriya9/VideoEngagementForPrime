@@ -25,8 +25,8 @@ public class MainQueryHandler {
 		final SpeechLookupCommandHandler speechLookupCommandHandler = new SpeechLookupCommandHandler(namedEntitiesProvider, audioDataProvider);
 		handlers.add(new GenericQueryHandler("(?i).*(rewind).*(by|to) (?<data>[0-9a-z\\s]{1,50} (second|minute|hour)).*", rewindCommandHandler));
 		handlers.add(new GenericQueryHandler("(?i).*(forward).*(by|to) (?<data>[0-9a-z\\s]{1,50} (second|minute|hour)).*", forwardCommandHandler));	
-		handlers.add(new GenericQueryHandler("(?i).*(play|take).*(when|where|from)(?<data>[0-9a-z\\s]*)", contextLookupCommandHandler));
-		handlers.add(new GenericQueryHandler("(?i).*(play|take).*(said|says|speaks|speak|talk|talks)(?<data>[0-9a-z\\s]*)", speechLookupCommandHandler));
+		handlers.add(new GenericQueryHandler("(?i).*(play|take|start).*(said|says|speaks|speak|talk|talks|ask|asks|request|requests)(?<data>[0-9a-z\\s]*)", speechLookupCommandHandler));
+		handlers.add(new GenericQueryHandler("(?i).*(play|take|start).*(when|where|from)(?<data>[0-9a-z\\s]*)", contextLookupCommandHandler));
 	}
 	
 	public final Integer handleQuery(final String videoId, final Integer timestamp, final String command) {
