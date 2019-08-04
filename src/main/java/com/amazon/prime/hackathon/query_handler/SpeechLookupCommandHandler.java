@@ -1,7 +1,7 @@
 package com.amazon.prime.hackathon.query_handler;
 
 import com.algorithmia.AlgorithmException;
-import com.amazon.prime.hackathon.ner.IAudioDescriptionDataProvider;
+import com.amazon.prime.hackathon.ner.IDataProvider;
 import com.amazon.prime.hackathon.ner.INamedEntitiesProvider;
 
 import java.io.IOException;
@@ -10,15 +10,15 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class ContextCommandHandler implements IQueryHandler{
+public class SpeechLookupCommandHandler implements IQueryHandler{
 
-	private final IAudioDescriptionDataProvider audioDescriptionDataProvider;
+	private final IDataProvider dataProvider;
 
 	private final INamedEntitiesProvider namedEntitiesProvider;
 
-	public ContextCommandHandler(INamedEntitiesProvider namedEntitiesProvider,
-								 IAudioDescriptionDataProvider audioDescriptionDataProvider){
-		this.audioDescriptionDataProvider = audioDescriptionDataProvider;
+	public SpeechLookupCommandHandler(INamedEntitiesProvider namedEntitiesProvider,
+								 IDataProvider dataProvider){
+		this.dataProvider = dataProvider;
 		this.namedEntitiesProvider = namedEntitiesProvider;
 	}
 
@@ -27,7 +27,7 @@ public class ContextCommandHandler implements IQueryHandler{
 
 		try {
 			Set<String> querySet = namedEntitiesProvider.getNamedEntities(command);
-			Map<Integer,Set<String>> audioDescriptionMap = audioDescriptionDataProvider.getData(videoId);
+			Map<Integer,Set<String>> audioDescriptionMap = dataProvider.getData(videoId);
 			AtomicInteger maxScore = new AtomicInteger();
 			AtomicInteger scoreVal = new AtomicInteger();
 			AtomicReference<Integer> timestamp = new AtomicReference<>(0);

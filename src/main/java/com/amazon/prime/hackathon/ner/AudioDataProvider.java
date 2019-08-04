@@ -15,14 +15,14 @@ import com.algorithmia.AlgorithmException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AudioDescriptionDataProvider implements IDataProvider{
+public class AudioDataProvider implements IDataProvider{
 	private static final String AD_FILE_FORMAT = "\\[(?<timestamp>.{4,8})\\] (?<line>.*)";
 	private final Pattern _ADPattern;
 	private final INamedEntitiesProvider namedEntitiesProvider;
 	private final Map<String, Map<Integer,Set<String>>> resultMaps;
 	private final String[] videoNames = {"goodomens"};
 	
-	public AudioDescriptionDataProvider(final INamedEntitiesProvider namedEntitiesProvider) {
+	public AudioDataProvider(final INamedEntitiesProvider namedEntitiesProvider) {
 		this._ADPattern = Pattern.compile(AD_FILE_FORMAT);
 		this.namedEntitiesProvider = namedEntitiesProvider;
 		this.resultMaps = new HashMap<String, Map<Integer,Set<String>>>();
@@ -34,7 +34,7 @@ public class AudioDescriptionDataProvider implements IDataProvider{
 			final Map<Integer,Set<String>> resultMap = new TreeMap<Integer, Set<String>>();
 			BufferedReader reader;
 			try {
-				reader = new BufferedReader(new FileReader(videoName+ ".AD"));
+				reader = new BufferedReader(new FileReader(videoName+ ".A"));
 				String fileLine = reader.readLine();
 				while (fileLine != null) {
 					final Matcher matcher = _ADPattern.matcher(fileLine);
